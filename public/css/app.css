@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    --bk-navy: #0D3B4E;
+    --bk-aqua: #2FBFA6;
+    --bk-amber: #F2A93B;
+    --bk-bg: #F5F7F8;
+    --bk-ink: #14213A;
+    --bk-muted: #4B5B66;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bk-bg);
+    color: var(--bk-ink);
+}
+
+h1, h2, h3, .brand {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+}
+
+/* Navbar */
+.bk-navbar {
+    padding: 16px 0;
+    background: transparent;
+}
+.bk-navbar .brand {
+    font-size: 20px;
+    color: var(--bk-navy);
+    text-decoration: none;
+}
+.bk-navbar .brand span {
+    color: var(--bk-aqua);
+}
+.bk-pill-nav {
+    background: #fff;
+    border-radius: 999px;
+    padding: 4px;
+    box-shadow: 0 1px 4px rgba(13,59,78,0.08);
+    display: inline-flex;
+    gap: 2px;
+}
+.bk-pill-nav a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--bk-ink);
+    padding: 8px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background .2s, color .2s;
+}
+.bk-pill-nav a.active,
+.bk-pill-nav a:hover {
+    background: var(--bk-navy);
+    color: #fff;
+}
+
+/* Hero */
+.bk-hero {
+    padding: 64px 0;
+}
+.bk-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--bk-navy);
+    background: #E1F5EE;
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+}
+.bk-hero h1 {
+    font-size: 42px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+}
+.bk-hero p.lead {
+    font-family: 'Inter', sans-serif;
+    color: var(--bk-muted);
+    font-size: 16px;
+    max-width: 420px;
+}
+
+/* Signature ring */
+.bk-ring {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 12px dashed var(--bk-aqua);
+    position: relative;
+    animation: bk-spin 22s linear infinite;
+}
+.bk-ring::after {
+    content: "";
+    position: absolute;
+    inset: 32px;
+    border-radius: 50%;
+    background: var(--bk-navy);
+}
+.bk-ring-sm {
+    width: 64px;
+    height: 64px;
+    border-width: 6px;
+}
+.bk-ring-sm::after {
+    inset: 10px;
+}
+@keyframes bk-spin {
+    to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .bk-ring { animation: none; }
+}
+
+/* Buttons */
+.btn-bk-primary {
+    background: var(--bk-navy);
+    color: #fff;
+    border-radius: 999px;
+    padding: 11px 26px;
+    font-weight: 500;
+    font-size: 14px;
+    border: none;
+}
+.btn-bk-primary:hover {
+    background: #0a2d3b;
+    color: #fff;
+}
+.btn-bk-ghost {
+    border: 1px solid rgba(13,59,78,0.25);
+    color: var(--bk-navy);
+    border-radius: 999px;
+    padding: 10px 24px;
+    font-weight: 500;
+    font-size: 14px;
+    background: transparent;
+}
+.btn-bk-ghost:hover {
+    background: rgba(13,59,78,0.05);
+    color: var(--bk-navy);
+}
+
+/* Cards */
+.bk-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    border: none;
+    box-shadow: 0 1px 3px rgba(13,59,78,0.06);
+    height: 100%;
+    transition: transform .2s, box-shadow .2s;
+}
+.bk-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(13,59,78,0.10);
+}
+.bk-card h5 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+.bk-card p {
+    color: var(--bk-muted);
+    font-size: 14px;
+    margin-bottom: 0;
+}
+.bk-price {
+    color: var(--bk-navy);
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* Page header (Tentang/Kontak) */
+.bk-pagehead {
+    padding: 48px 0 32px;
+}
+.bk-pagehead h1 {
+    font-size: 32px;
+}
+
+/* Footer */
+.bk-footer {
+    background: var(--bk-navy);
+    color: rgba(255,255,255,0.7);
+    padding: 32px 0;
+    margin-top: 64px;
+}
+.bk-footer .brand {
+    color: #fff;
+}
