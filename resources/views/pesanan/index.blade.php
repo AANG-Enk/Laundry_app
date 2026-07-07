@@ -12,6 +12,24 @@
         </div>
     </div>
 
+    <div class="bk-card mb-4">
+        <h6 class="mb-3">Laporan Bulanan</h6>
+        <form method="POST" class="row g-2 align-items-center">
+            @csrf
+            <div class="col-md-4">
+                <input type="month" id="bulan" class="form-control" required>
+            </div>
+            <div class="col-md-8 d-flex gap-2">
+                <button formaction="{{ route('pesanan.export.excel') }}" name="bulan" value="" class="btn btn-bk-primary">
+                    Export Excel
+                </button>
+                <button formaction="{{ route('pesanan.export.pdf') }}" name="bulan" value="" class="btn btn-outline-danger">
+                    Export PDF
+                </button>
+            </div>
+        </form>
+    </div>
+
     <div class="bk-card">
         <div class="table-responsive">
             <table class="table align-middle">
@@ -36,6 +54,15 @@
 </div>
 
 <script>
+// Ambil angka bulan (01-12) dari input type="month" (formatnya YYYY-MM),
+// lalu suntikkan ke value tombol submit sebelum form dikirim
+document.querySelectorAll('button[name=bulan]').forEach(btn => {
+    btn.addEventListener('click', function () {
+        const bulanInput = document.getElementById('bulan').value; // contoh: "2026-07"
+        this.value = bulanInput.split('-')[1] ?? '';
+    });
+});
+
 function formatRupiah(angka) {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
 }

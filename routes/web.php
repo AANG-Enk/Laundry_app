@@ -37,8 +37,9 @@ Route::get('/dashboard', function () {
 Route::get('/layanan', [FrontendLayananController::class, 'index'])->name('layanan.index');
 Route::get('/layanan/create', [FrontendLayananController::class, 'create'])->name('layanan.create');
 Route::get('/layanan/edit/{id}', [FrontendLayananController::class, 'edit'])->name('layanan.edit');
-// Tambahkan baris ini ke routes/web.php, di dekat route /layanan lainnya
 Route::post('/layanan/import', [FrontendLayananController::class, 'import'])->name('layanan.import');
+Route::post('/pesanan/export/excel', [FrontendPesananController::class, 'exportExcel'])->name('pesanan.export.excel');
+Route::post('/pesanan/export/pdf', [FrontendPesananController::class, 'exportPdf'])->name('pesanan.export.pdf');
 
 Route::get('/pelanggan', [FrontendPelangganController::class, 'index'])->name('pelanggan.index');
 Route::get('/pelanggan/create', [FrontendPelangganController::class, 'create'])->name('pelanggan.create');
