@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 
 class PesananController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return response()->json(
@@ -19,9 +16,6 @@ class PesananController extends Controller
         );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -36,7 +30,6 @@ class PesananController extends Controller
             'catatan'          => 'nullable|string',
         ]);
 
-        // Hitung total harga otomatis berdasarkan harga layanan (per kg atau per item)
         $layanan = Layanan::findOrFail($validated['id_layanan']);
         $qty = $layanan->satuan === 'kg'
             ? ($validated['berat_kg'] ?? 0)
@@ -52,9 +45,6 @@ class PesananController extends Controller
         );
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Pesanan $pesanan)
     {
         return response()->json(
@@ -62,14 +52,14 @@ class PesananController extends Controller
         );
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Pesanan $pesanan)
     {
+        // FIX: sebelumnya "exists:layanans,id_layanan" dan "exists:pelanggans,id_pelanggan"
+        // — kolom itu tidak ada di tabel layanans/pelanggans (PK-nya cuma "id"), jadi validasi
+        // selalu gagal setiap kali id_layanan/id_pelanggan dikirim saat update.
         $validated = $request->validate([
-            'id_layanan'       => 'sometimes|required|exists:layanans,id_layanan',
-            'id_pelanggan'     => 'sometimes|required|exists:pelanggans,id_pelanggan',
+            'id_layanan'       => 'sometimes|required|exists:layanans,id',
+            'id_pelanggan'     => 'sometimes|required|exists:pelanggans,id',
             'berat_kg'         => 'nullable|numeric|min:0',
             'jumlah_item'      => 'nullable|integer|min:0',
             'tanggal_masuk'    => 'sometimes|required|date',
@@ -78,7 +68,6 @@ class PesananController extends Controller
             'catatan'          => 'nullable|string',
         ]);
 
-        // Hitung ulang total harga jika layanan/qty berubah
         if (isset($validated['id_layanan']) || array_key_exists('berat_kg', $validated) || array_key_exists('jumlah_item', $validated)) {
             $layanan = Layanan::findOrFail($validated['id_layanan'] ?? $pesanan->id_layanan);
             $qty = $layanan->satuan === 'kg'
@@ -94,9 +83,6 @@ class PesananController extends Controller
         );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Pesanan $pesanan)
     {
         $pesanan->delete();

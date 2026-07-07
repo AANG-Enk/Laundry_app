@@ -26,17 +26,18 @@ class LoginController extends Controller
         }
 
         session([
-            'login' => true,
-            'user_id' => $user->id_user,
-            'nama' => $user->nama,
+            'login'   => true,
+            'user_id' => $user->id,
+            'nama'    => $user->name, // FIX: kolomnya "name", bukan "nama"
         ]);
 
         return redirect('/dashboard');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        session()->flush();
+        $request->session()->flush();
+
         return redirect('/login');
     }
 }

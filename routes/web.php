@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\FrontendLayananController;
+use App\Http\Controllers\FrontendPelangganController;
+use App\Http\Controllers\FrontendPesananController;
 
 Route::get('/', function () {
     return view('home');
@@ -29,3 +32,16 @@ Route::get('/dashboard', function () {
     }
     return view('dashboard');
 });
+
+
+Route::get('/layanan', [FrontendLayananController::class, 'index'])->name('layanan.index');
+Route::get('/layanan/create', [FrontendLayananController::class, 'create'])->name('layanan.create');
+Route::get('/layanan/edit/{id}', [FrontendLayananController::class, 'edit'])->name('layanan.edit');
+
+Route::get('/pelanggan', [FrontendPelangganController::class, 'index'])->name('pelanggan.index');
+Route::get('/pelanggan/create', [FrontendPelangganController::class, 'create'])->name('pelanggan.create');
+Route::get('/pelanggan/edit/{id}', [FrontendPelangganController::class, 'edit'])->name('pelanggan.edit');
+
+Route::get('/pesanan', [FrontendPesananController::class, 'index'])->name('pesanan.index');
+Route::get('/pesanan/create', [FrontendPesananController::class, 'create'])->name('pesanan.create');
+Route::get('/pesanan/edit/{id}', [FrontendPesananController::class, 'edit'])->name('pesanan.edit');
